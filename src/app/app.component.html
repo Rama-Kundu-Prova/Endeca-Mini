@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="d-flex flex-column">
+
+        <div>
+          <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid justify-content-center">
+              <span class="navbar-brand mb-0 h1">Mini Endeca</span>
+            </div>
+          </nav>
+        </div>
+
+        <div>
+          <div class="d-flex justify-content-between mt-4 ">
+            <!---->
+            <div>
+              <div class="container">
+                <div class="d-flex flex-column">
+                  <p-dropdown [style]="{'width':'300px'}" class="mb-2 mt-4" [options]="collection" optionLabel="name"
+                    [(ngModel)]="selectedCollection" placeholder="Select Collection"
+                    (onChange)="onSubmit()"></p-dropdown>
+                  <p-dropdown [style]="{'width':'300px'}" class="mb-2 " [options]="country" optionLabel="name"
+                    [(ngModel)]="selectedCountry" placeholder="Select Country" (onChange)="onSubmit()"></p-dropdown>
+                  <p-dropdown [style]="{'width':'300px'}" class="mb-2" [options]="relatedCountry" optionLabel="name"
+                    [(ngModel)]="selectedRelatedCountry" placeholder="Select Related Country"
+                    (onChange)="onSubmit()"></p-dropdown>
+                  <p-dropdown [style]="{'width':'300px'}" class="mb-2" [options]="region" optionLabel="name"
+                    [(ngModel)]="selectedRegion" placeholder="Select Region" (onChange)="onSubmit()"></p-dropdown>
+                  <p-dropdown [style]="{'width':'300px'}" class="mb-2" [options]="organization" optionLabel="name"
+                    [(ngModel)]="selectedOrg" placeholder="Select Organization" (onChange)="onSubmit()"></p-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card m-4" style="width: 40rem;" *ngFor="let item of p">
+                <div class="card-body">
+                  <h5 class="card-title" style="color: rgba(226, 43, 83, 0.943);">{{item.global_title[0]}}</h5>
+                  <p class="card-subtitle mb-2 text-muted"
+                    *ngIf="item.review_date && item.review_date[0] !== undefined">
+                    <b>Last reviewed:</b> {{item.review_date[0]}}
+                  </p>
+                  <p class="card-text" style="color: blue;"
+                    *ngIf="item.sort_language && item.sort_language[0] !== undefined"><b>Language:</b>
+                    {{item.sort_language[0]}}
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+
+        <div *ngIf= "selectedCollection || selectedCountry || selectedRelatedCountry || selectedRegion || selectedOrg" class="d-flex justify-content-around mt-5">
+          <div>
+            <button class="btn btn-primary" (click)="previous()">previous</button>
+          </div>
+          <div>
+            <button class="btn btn-primary" (click)="next()">next</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+</html>
